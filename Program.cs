@@ -6,21 +6,21 @@ class Program
 {
     static void Main()
     {
-        // Создание XML документа
+        // РЎРѕР·РґР°РЅРёРµ XML РґРѕРєСѓРјРµРЅС‚Р°
         XmlDocument doc = new XmlDocument();
 
-         // Добавление строки, указывающей версию XML и кодировку
+         // Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚СЂРѕРєРё, СѓРєР°Р·С‹РІР°СЋС‰РµР№ РІРµСЂСЃРёСЋ XML Рё РєРѕРґРёСЂРѕРІРєСѓ
         XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
         doc.AppendChild(xmlDeclaration);
 
-        // Добавление строки, связывающей XML файл с CSS файлом
+        // Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚СЂРѕРєРё, СЃРІСЏР·С‹РІР°СЋС‰РµР№ XML С„Р°Р№Р» СЃ CSS С„Р°Р№Р»РѕРј
         XmlProcessingInstruction pi = doc.CreateProcessingInstruction("xml-stylesheet", "type=\"text/css\" href=\"tt.css\"");
         doc.AppendChild(pi);
 
         XmlElement root = doc.CreateElement("telef");
         doc.AppendChild(root);
 
-        // Чтение данных из текстового файла
+        // Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С‚РµРєСЃС‚РѕРІРѕРіРѕ С„Р°Р№Р»Р°
         string[] lines = File.ReadAllLines("input.txt");
         foreach (string line in lines)
         {
@@ -29,48 +29,48 @@ class Program
             XmlElement phone = doc.CreateElement("tele");
             root.AppendChild(phone);
 
-            XmlElement model = doc.CreateElement("название");
+            XmlElement model = doc.CreateElement("РЅР°Р·РІР°РЅРёРµ");
             model.InnerText = parts[0].Trim();
             phone.AppendChild(model);
 
-            XmlElement brand = doc.CreateElement("изготовитель");
+            XmlElement brand = doc.CreateElement("РёР·РіРѕС‚РѕРІРёС‚РµР»СЊ");
             brand.InnerText = parts[1].Trim();
             phone.AppendChild(brand);
 
-            XmlElement color = doc.CreateElement("цвет");
+            XmlElement color = doc.CreateElement("С†РІРµС‚");
             color.InnerText = parts[2].Trim();
             phone.AppendChild(color);
 
-            XmlElement display = doc.CreateElement("дисплей");
+            XmlElement display = doc.CreateElement("РґРёСЃРїР»РµР№");
             display.InnerText = parts[3].Trim();
             phone.AppendChild(display);
 
-            XmlElement dimensions = doc.CreateElement("размеры");
+            XmlElement dimensions = doc.CreateElement("СЂР°Р·РјРµСЂС‹");
             dimensions.InnerText = parts[4].Trim();
             phone.AppendChild(dimensions);
 
-            XmlElement year = doc.CreateElement("год");
+            XmlElement year = doc.CreateElement("РіРѕРґ");
             year.InnerText = parts[5].Trim();
             phone.AppendChild(year);
 
-            XmlElement charging = doc.CreateElement("зарядка");
+            XmlElement charging = doc.CreateElement("Р·Р°СЂСЏРґРєР°");
             charging.InnerText = parts[6].Trim();
             phone.AppendChild(charging);
 
-            XmlElement battery = doc.CreateElement("батарея");
+            XmlElement battery = doc.CreateElement("Р±Р°С‚Р°СЂРµСЏ");
             battery.InnerText = parts[7].Trim();
             phone.AppendChild(battery);
 
-            XmlElement caseColor = doc.CreateElement("цвет_чехла");
+            XmlElement caseColor = doc.CreateElement("С†РІРµС‚_С‡РµС…Р»Р°");
             caseColor.InnerText = parts[8].Trim();
             phone.AppendChild(caseColor);
         }
 
-        // Сохранение XML документа
-        doc.Save("Телефоны.xml");
+        // РЎРѕС…СЂР°РЅРµРЅРёРµ XML РґРѕРєСѓРјРµРЅС‚Р°
+        doc.Save("РўРµР»РµС„РѕРЅС‹.xml");
 
-        // Создание CSS файла
-        string css = "telef {display: table; width: 100%; border-collapse: collapse; background-color: #d8b1bf; } tele { display: table-row; } название, изготовитель, цвет, дисплей, размеры, год, зарядка, батарея, цвет_чехла { display: table-cell; padding: 15px; text-align: left; border-bottom: 1px solid #ddd; color: red;}";
+        // РЎРѕР·РґР°РЅРёРµ CSS С„Р°Р№Р»Р°
+        string css = "telef {display: table; width: 100%; border-collapse: collapse; background-color: #d8b1bf; } tele { display: table-row; } РЅР°Р·РІР°РЅРёРµ, РёР·РіРѕС‚РѕРІРёС‚РµР»СЊ, С†РІРµС‚, РґРёСЃРїР»РµР№, СЂР°Р·РјРµСЂС‹, РіРѕРґ, Р·Р°СЂСЏРґРєР°, Р±Р°С‚Р°СЂРµСЏ, С†РІРµС‚_С‡РµС…Р»Р° { display: table-cell; padding: 15px; text-align: left; border-bottom: 1px solid #ddd; color: red;}";
         File.WriteAllText("tt.css", css);
     }
 }
